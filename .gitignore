@@ -1,0 +1,29 @@
+# Node.js dependencies
+node_modules/
+
+# Environment variables
+.env
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Frontend React build folder
+frontend/build/
+
+# Vercel deployment folder
+.vercel/
+
+# Optional: editor folders
+.vscode/
+.idea/
+
+# Optional: Mac system files
+*.swp
