@@ -1,15 +1,16 @@
+
 ---
 
-##  Pastebin-Lite — Minimal Paste Sharing API
+# Pastebin-Lite — Minimal Paste Sharing API
 
 Pastebin-Lite is a lightweight backend service where users can create and share text snippets (“pastes”).
-Each paste can have:
+Each paste can have
 
-*  Expiry time (TTL in seconds)
-*  View-count limit
-*  Shareable link
+* Expiry time (TTL in seconds)
+* View count limit
+* Shareable link
 
-Built with:
+Built with
 
 * Node.js + Express
 * Prisma ORM
@@ -17,7 +18,7 @@ Built with:
 
 ---
 
-##  Features
+## 🚀 Features
 
 * Create a paste with content, TTL, and max-views
 * Fetch paste by slug
@@ -27,7 +28,7 @@ Built with:
 
 ---
 
-##  Project Setup
+## 🛠 Project Setup
 
 ### Install dependencies
 
@@ -35,9 +36,7 @@ Built with:
 npm install
 ```
 
----
-
-###  Environment variables
+### Environment variables
 
 Create a `.env` file:
 
@@ -48,7 +47,7 @@ PORT=3000
 
 ---
 
-### Prisma setup
+## 🗄 Prisma setup
 
 Generate client & sync schema:
 
@@ -57,7 +56,7 @@ npx prisma generate
 npx prisma db push
 ```
 
-(Optional) View DB in Prisma Studio:
+(Optional) open DB in Prisma Studio
 
 ```bash
 npx prisma studio
@@ -65,13 +64,13 @@ npx prisma studio
 
 ---
 
-###  Start Server
+## ▶ Start Server
 
 ```bash
 npm run dev
 ```
 
-Server runs at:
+Server runs at
 
 ```
 http://localhost:3000
@@ -79,13 +78,13 @@ http://localhost:3000
 
 ---
 
-##  API Endpoints
+## 📌 API Endpoints
 
-###  Create Paste
+### Create Paste
 
 **POST** `/api/pastes`
 
-Body (JSON):
+Body:
 
 ```json
 {
@@ -95,30 +94,28 @@ Body (JSON):
 }
 ```
 
-Response:
+Response
 
 ```json
 {
   "id": "xYz12A",
-  "url": "http://localhost:3000/p/xYz12A",
-  "expires_in": 60,
-  "max_views": 5
+  "url": "http://localhost:3000/p/xYz12A"
 }
 ```
 
 ---
 
-###  Get Paste By Slug
+### Get Paste by Slug
 
 **GET** `/api/pastes/:slug`
 
-Example:
+Example
 
 ```
 http://localhost:3000/api/pastes/xYz12A
 ```
 
-Returns:
+Returns
 
 ```json
 {
@@ -127,25 +124,25 @@ Returns:
 }
 ```
 
-Paste will be deleted if:
+Paste is deleted if
 
 * TTL expired
 * Max views reached
 
 ---
 
-###  Auto-Cleanup Rules
+## 🧹 Auto-Cleanup Rules
 
-A paste is deleted when:
+A paste is deleted when
 
-| Condition          | Meaning                              |
-| ------------------ | ------------------------------------ |
-| TTL expired        | Current time > created + ttl_seconds |
-| Max views exceeded | views ≥ max_views                    |
+| Condition         | Meaning                  |
+| ----------------- | ------------------------ |
+| TTL expired       | current time > expiresAt |
+| Max views reached | viewCount ≥ maxViews     |
 
 ---
 
-##  Prisma Model (reference)
+## 📦 Prisma Model (reference)
 
 ```prisma
 model Paste {
@@ -161,15 +158,13 @@ model Paste {
 
 ---
 
-##  Testing in Postman
+## 🧪 Testing in Postman
 
-#### Step-1 → Create a new HTTP Request
+### Step-1 → Create Paste
 
-* Method → **POST**
+* Method → POST
 * URL → `http://localhost:3000/api/pastes`
 * Body → raw → JSON
-
-Paste JSON:
 
 ```json
 {
@@ -181,7 +176,7 @@ Paste JSON:
 
 Click **Send**
 
-You will receive a paste URL like:
+You will receive a URL like:
 
 ```
 http://localhost:3000/p/abc123
@@ -189,40 +184,43 @@ http://localhost:3000/p/abc123
 
 ---
 
-#### Step-2 → Fetch paste
+### Step-2 → Fetch Paste
 
-* Method → **GET**
-* URL →
+* Method → GET
+* URL:
 
 ```
 http://localhost:3000/api/pastes/abc123
 ```
 
-Each view reduces `remaining_views`
+Each view reduces `remaining_views`.
 
 ---
 
-##  Common Issues
+## ⚠ Common Issues
 
-| Error                       | Reason                              |
-| --------------------------- | ----------------------------------- |
-| `Cannot GET /`              | No route defined for root endpoint  |
-| `Cannot GET /api/pastes`    | You are calling GET instead of POST |
-| `Prisma schema not found`   | schema.prisma path missing          |
-| `database connection error` | Wrong DATABASE_URL                  |
-
----
-
-##  Roadmap / Possible Enhancements
-
-*  Password-protected pastes
-*  Front-end UI
-*  Scheduled cleanup job
-* Dashboard for paste stats
+| Error                     | Reason                              |
+| ------------------------- | ----------------------------------- |
+| Cannot GET /              | Root route not defined              |
+| Cannot GET /api/pastes    | Used GET instead of POST for create |
+| Prisma schema not found   | schema.prisma missing / wrong path  |
+| Database connection error | Wrong `DATABASE_URL`                |
 
 ---
 
-##  Author
-K Naga Lalitha Sri 
-Pastebin-Lite backend — built for learning & practice purpose only.
+## 📌 Roadmap (Future Enhancements)
+
+* Password-protected pastes
+* Front-end UI
+* Admin dashboard
+* Scheduled cleanup job
+
 ---
+
+## 👩‍💻 Author
+
+**K Naga Lalitha Sri**
+Pastebin-Lite backend — built for learning & practice.
+
+---
+
